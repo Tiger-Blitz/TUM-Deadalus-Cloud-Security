@@ -48,6 +48,13 @@ resource "aws_s3_bucket_policy" "tropical_vault_bucket_policy" {
       },
       Action    = "s3:GetObject",
       Resource  = "${aws_s3_bucket.tropical_vault_bucket.arn}/public/*"
+    },
+    {
+    Sid = "DenyCriticalAccess"
+    Effect = "Deny"
+    Principal = "*"
+    Action = "s3:GetObject"
+    Resource = "${aws_s3_bucket.tropical_vault_bucket.arn}/critical/*"
     }]
   })
 }
